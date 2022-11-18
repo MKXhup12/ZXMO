@@ -1,198 +1,84 @@
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("ZX Hub", "DarkTheme")
-
 local Tab = Window:NewTab("Main")
-
 local Section = Tab:NewSection("Auto Equip")
 
 local Weaponlist = {}
-
 local Weapon = nil
 
 for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-
     table.insert(Weaponlist,v.Name)
-
 end
 
 Section:NewDropdown("select weapon", " ", Weaponlist, function(currentOption)
-
     Weapon = currentOption
-
 end)
 
 Section:NewToggle("Auto Equip", " ", function(a)
-
 AutoEquiped = a
-
 end)
 
 spawn(function()
-
 while wait() do
-
 if AutoEquiped then
-
 pcall(function()
-
 game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Weapon))
-
 end)
-
 end
-
 end
-
 end)
 
 local Tab = Window:NewTab("ไก่ตันละมั้ง")
-
 local noSection = Tab:NewSection("เริ่ม")
-
-Section:NewButton("ButtonText", "ButtonInfo", function()
-
+Section:NewButton("กด", "ButtonInfo", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/GooD1020/Exon_x_hub_kaitan/main/README.md"))()
-
 end)
 
 Section:NewButton("ButtonText", "ButtonInfo", function()
+(getgenv()).Config = {
+ ["FastAttack"] = true,
+ ["ClickAttack"] = true
+} 
 
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/GooD1020/Exon_x_hub_kaitan/main/README.md"))()
-
-end)
-
-Section:NewButton("ตัน1วิ", "ButtonInfo", function()
-
-    pcall(function()
-
-      game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
-
-    end)
-
-    pcall(function()
-
-      game.Players.LocalPlayer.CameraMaxZoomDistance = 0
-
-    end)
-
-    pcall(function()
-
-      spawn(function()
-
-        while wait() do
-
-          if not UserSettings().GameSettings:InFullScreen() then
-
-            game:GetService("GuiService"):ToggleFullscreen()
-
-            wait(0.5)
-
-          end
-
-          wait(0.25)
-
+coroutine.wrap(function()
+local StopCamera = require(game.ReplicatedStorage.Util.CameraShaker)StopCamera:Stop()
+    for v,v in pairs(getreg()) do
+        if typeof(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework then
+             for v,v in pairs(debug.getupvalues(v)) do
+                if typeof(v) == "table" then
+                    spawn(function()
+                        game:GetService("RunService").RenderStepped:Connect(function()
+                            if getgenv().Config['FastAttack'] then
+                                 pcall(function()
+                                     v.activeController.timeToNextAttack = -(math.huge^math.huge^math.huge)
+                                     v.activeController.attacking = false
+                                     v.activeController.increment = 4
+                                     v.activeController.blocking = false   
+                                     v.activeController.hitboxMagnitude = 150
+    		                         v.activeController.humanoid.AutoRotate = true
+    	                      	     v.activeController.focusStart = 0
+    	                      	     v.activeController.currentAttackTrack = 0
+                                     sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRaxNerous", math.huge)
+                                 end)
+                             end
+                         end)
+                    end)
+                end
+            end
         end
-
-      end)
-
-    end)
-
-    pcall(function()
-
-      game:GetService("UserInputService").MouseIconEnabled = false
-
-    end)
-
-    pcall(function()
-
-      game.CoreGui:FindFirstChild("RobloxGui").Enabled = false
-
-    end)
-
-    pcall(function()
-
-      game.CoreGui:FindFirstChild("PlayerList").Enabled = false
-
-    end)
-
-    pcall(function()
-
-      game.CoreGui:FindFirstChild("TopBar").Enabled = false
-
-    end)
-
-function tawan()
-
-local function fiximage(id)
-
-return string.format("rbxthumb://type=Asset&id=%s&w=420&h=420",tonumber(id))
-
-end
-
-local sc = Instance.new("ScreenGui",game.CoreGui)
-
-sc.DisplayOrder = 10000
-
-sc.IgnoreGuiInset = true
-
-local img = Instance.new("ImageLabel",sc)
-
-img.Size = UDim2.new(1,0,1,0)
-
-img.Image = fiximage(142410803)
-
-img.ScaleType = "Fit"
-
-img.BackgroundColor3 = Color3.fromRGB(0,0,0)
+    end
+end)();
 
 spawn(function()
-
-while wait() do
-
-    img.ImageColor3 = Color3.new(math.random(1,255)/255,math.random(1,255)/255,math.random(1,255)/255)
-
-    wait()
-
-    img.ImageColor3 = Color3.new(1,1,1)
-
-end
-
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if getgenv().Config['ClickAttack'] then
+             pcall(function()
+                game:GetService'VirtualUser':CaptureController()
+			    game:GetService'VirtualUser':Button1Down(Vector2.new(0,1,0,1))
+            end)
+        end
+    end)
 end)
-
-local auegh = Instance.new("Sound",game)
-
-auegh.Volume = 10
-
-auegh.SoundId = "rbxassetid://5567523008"
-
-auegh:Play()
-
-auegh.Ended:Connect(function()
-
-wait()
-
-auegh:Destroy()
-
-end)
-
-game:GetService("TweenService"):Create(img,TweenInfo.new(3),{BackgroundTransparency = 1,ImageTransparency = 1}):Play()
-
-delay(3,function()
-
-sc:Destroy()
-
-end)
-
-end
-
-while wait() do
-
-if math.random(1,5) == 1 then
-
-tawan()
-
-end
-
-end
-
 end)
 
