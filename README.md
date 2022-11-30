@@ -29,13 +29,9 @@ end
 end
 end)
 
-local Tab = Window:NewTab("ไก่ตันละมั้ง")
-local noSection = Tab:NewSection("เริ่ม")
-Section:NewButton("กด", "ButtonInfo", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/GooD1020/Exon_x_hub_kaitan/main/README.md"))()
-end)
 
-Section:NewButton("ButtonText", "ButtonInfo", function()
+Section:NewToggle("ตีเร็ว", "ToggleInfo", function(state)
+
 (getgenv()).Config = {
  ["FastAttack"] = true,
  ["ClickAttack"] = true
@@ -82,3 +78,22 @@ spawn(function()
 end)
 end)
 
+Section:NewToggle("จอขาว", "ToggleInfo", function(state)
+
+
+_G.White_Screen = true 
+
+if _G.White_Screen then
+    game:GetService("RunService"):Set3dRenderingEnabled(false)
+    else
+        game:GetService("RunService"):Set3dRenderingEnabled(true)
+end
+end)
+
+Section:NewToggle("🐔", "ToggleInfo", function(state)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/GooD1020/Exon_x_hub_kaitan/main/README.md"))()
+end)
+
+Section:NewToggle("เก็บกล่อง", "ToggleInfo", function(state)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptpastebin/raw/main/ChestFarm"))()
+end)
