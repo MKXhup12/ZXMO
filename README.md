@@ -1,4 +1,4 @@
-(getgenv()).Key = ""
+(getgenv()).Key = "chicken-YUYOIP-UJUM9"
 
 local keys = {
      "chicken-YUYOIP-UJUM9",
@@ -16,11 +16,11 @@ for i,v in pairs(keys) do
     if counter == #keys then
         keys = ""
         game.Players.LocalPlayer:Kick("please enter your key")
-    else
-        if v == getgenv().Key then 
-            -- check succes
-            print("Succesfully, enjoy :]")
-            -- your script
+    อื่น
+        ถ้า v == getgenv(). คีย์แล้ว
+            -ความสำเร็จ
+            print("ไอ้ควาย :]")
+            -- loadstring(game:HttpGet("https://raw.githubusercontent.com/MKXhup12/ZXMO/main/README.md"))()
             
 shared.LoaderTitle = 'chicken Hub3.0' -- ใส่ชื่อ
 shared.LoaderKeyFrames = {
