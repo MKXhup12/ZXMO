@@ -1,4 +1,4 @@
-(getgenv()).Key = "chicken-YUYOIP-UJUM9"
+(getgenv()).คีย์ = "ไก่-YUYOIP-UJUM9"
 
 local keys = {
      "chicken-YUYOIP-UJUM9",
@@ -20,7 +20,7 @@ for i,v in pairs(keys) do
         ถ้า v == getgenv(). คีย์แล้ว
             -ความสำเร็จ
             print("ไอ้ควาย :]")
-            -- loadstring(game:HttpGet("https://raw.githubusercontent.com/MKXhup12/ZXMO/main/README.md"))()
+            -- 
             
 shared.LoaderTitle = 'chicken Hub3.0' -- ใส่ชื่อ
 shared.LoaderKeyFrames = {
